@@ -1,0 +1,64 @@
+form.button_to {
+  padding-bottom: 0;
+
+  #proposition-links & {
+    input[type="submit"] {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: $white;
+      padding: 0;
+      margin: 0;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration-skip: ink;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:focus {
+        color: $black;
+        background-color: $yellow;
+        outline: 3px solid $yellow;
+      }
+    }
+  }
+}
+
+/* Tweaks */
+
+.form .app__heading {
+  margin-bottom: 3rem;
+}
+
+.form-submit {
+  margin-top: 3rem;
+}
+
+.error {
+  margin-right: 15px;
+  border-left: 4px solid #b10e1e;
+  padding-left: 10px;
+}
+
+@media (min-width: 641px) {
+  .error {
+    border-left: 5px solid #b10e1e;
+    padding-left: 15px;
+  }
+}
+
+// This is a workaround to make the fieldset legends visually hidden, as `govuk_elements_form_builder`
+// doesn't support this in their current version.
+//
+// Update: it turns out, WE NEED labels sometimes, so can't hide all or nothing. Commenting out for now and
+// we might need to revisit PR: https://github.com/ministryofjustice/govuk_elements_form_builder/pull/89
+//
+//fieldset {
+//  legend {
+//    span.form-label-bold {
+//      @extend .visuallyhidden
+//    }
+//  }
+//}

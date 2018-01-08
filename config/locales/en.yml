@@ -1,0 +1,1033 @@
+en:
+  dictionary:
+    default_service_title: &default_service_title "C100 Children and the Family Courts - GOV.UK"
+    dont_know: &dont_know "Don't know"
+    birthplace_hint: &birthplace_hint "For example, town or city"
+    order_current: &order_current "Is the order current?"
+    order_current_error: &order_current_error "Please answer if the order is current"
+    order_length: &order_length "How long is the order for?"
+    order_court_name: &order_court_name "Which court issued the order?"
+
+    YESNO: &YESNO
+      'yes': 'Yes'
+      'no': 'No'
+      unknown: *dont_know
+
+    START_FINISH: &START_FINISH
+      start_again: Start again
+      finish: Finish
+
+    RELATIONS: &RELATIONS
+      mother: Mother
+      father: Father
+      legal_guardian: Legal guardian
+      grandparent: Grandparent
+      relative: Relative
+      family_friend: Family friend
+      social_worker: Social worker
+      other: Other
+
+    PETITION_ORDERS: &PETITION_ORDERS
+      child_home: Arrange where they live
+      child_times: Arrange how much time they spend with each parent
+      child_contact: Confirm when and what other types of contact will take place with them
+      child_specific_issue_school: Which school they go to
+      child_specific_issue_religion: A religious issue
+      child_specific_issue_name: Changing their names
+      child_specific_issue_medical: Medical treatment
+      child_specific_issue_abroad: Moving location
+      child_return: Return them to your care
+      child_abduction: Stop the other parent abducting them
+      child_flight: Stop the other parent taking them abroad or moving location without your permission
+      other: Resolve another issue
+
+    # This is a compilation of all possible fields shared between Applicants, Respondents and Children
+    PERSONAL_DETAILS_FIELDS: &PERSONAL_DETAILS_FIELDS
+      full_name: Full name
+      has_previous_name:
+        <<: *YESNO
+      previous_name: What was their previous name?
+      gender:
+        female: Female
+        male: Male
+      dob_unknown: *dont_know
+      birthplace: Place of birth
+
+    # This is a compilation of all possible fields shared between Applicants and Respondents (maybe others later)
+    PERSONAL_CONTACT_FIELDS: &PERSONAL_CONTACT_FIELDS
+      address: Address
+      postcode: Postcode
+      postcode_unknown: *dont_know
+      home_phone: Home phone
+      mobile_phone: Mobile phone
+      mobile_phone_unknown: *dont_know
+      email: Email address
+      email_unknown: *dont_know
+      residence_requirement_met:
+        <<: *YESNO
+
+    # This is a compilation of all possible errors shared between different parties
+    PERSONAL_DETAILS_ERRORS: &PERSONAL_DETAILS_ERRORS
+      full_name:
+        blank: Please enter the full name
+      previous_name:
+        blank: Please enter the previous name
+      dob:
+        blank: Please enter the date of birth
+      birthplace:
+        blank: Please enter the place of birth
+      address:
+        blank: Please enter the address
+      postcode:
+        blank: Please enter the postcode
+      mobile_phone:
+        blank: Please enter the mobile phone
+      email:
+        invalid: Please enter a valid email
+        blank: Please enter an email
+
+    # This are all the kind of abuse concerns, for applicant and for children. For now they
+    # are the same for both, but we might need to customize some of these later on.
+    ABUSE_CONCERNS: &ABUSE_CONCERNS
+      physical_html: |
+        <p>Physical abuse includes actions such as:</p>
+        <ul class="list list-bullet">
+          <li>punching</li>
+          <li>choking</li>
+          <li>kicking</li>
+          <li>hitting with an object</li>
+        </ul>
+      psychological_html: |
+        <p>Psychological abuse is when someone is subjected to a situation that can lead to:</p>
+        <ul class="list list-bullet">
+          <li>anxiety</li>
+          <li>depression</li>
+          <li>post-traumatic stress disorder</li>
+        </ul>
+      financial_html: |
+        <p>Examples of financial abuse include:</p>
+        <ul class="list list-bullet">
+          <li>not allowing a person to work</li>
+          <li>stopping someone saving their own money</li>
+          <li>withholding money or credit cards</li>
+        </ul>
+      other_html: ""
+
+  steps:
+    shared:
+      kickout_feedback: Give your feedback. Help improve this service
+      relationship_step:
+        heading: "How is %{person_name} related to %{child_name}"
+    applicant:
+      user_type:
+        edit:
+          page_title: Who is applying
+          heading: Are you the person making this application?
+      names:
+        edit:
+          page_title: Applicant names
+          heading: Enter the applicant’s name
+          lead_text: Anyone who is making this application is known as the applicant.
+          record_index: "Applicant %{index}"
+          btn_add_another: Add another applicant
+          btn_remove: Remove last applicant
+      personal_details:
+        edit:
+          page_title: Applicant personal details
+          heading: "Provide details for %{name}"
+      contact_details:
+        edit:
+          page_title: Applicant contact details
+          heading: "Contact details of %{name}"
+      relationship:
+        edit:
+          page_title: Applicant relationship
+    help_with_fees:
+      help_paying:
+        edit:
+          page_title: Help paying
+          heading: Do you need help paying the court fee?
+          lead_text: You may be able to get help paying the £215 fee if you’re on a low income, receive certain benefits or have little or no savings.
+          hwf_reference_number_help_html: '<p>You’ll need to get a <a href="https://www.gov.uk/get-help-with-court-fees">reference number</a> before you can continue with this service.</p>'
+    respondent:
+      names:
+        edit:
+          page_title: Respondent names
+          heading: Enter the respondent’s name
+          lead_text: The other person who will receive this application is known as the respondent.
+          record_index: "Respondent %{index}"
+          btn_add_another: Add another respondent
+          btn_remove: Remove last respondent
+      personal_details:
+        edit:
+          page_title: Respondent personal details
+          heading: "Provide details for %{name}"
+      contact_details:
+        edit:
+          page_title: Respondent contact details
+          heading: "Contact details of %{name}"
+      has_other_parties:
+        edit:
+          page_title: Other parties required
+          heading: Are there any other people who should be given notice of the hearing?
+      relationship:
+        edit:
+          page_title: Respondent relationship
+    children:
+      names:
+        edit:
+          page_title: Enter the names of your children
+          heading: Enter the names of your children
+          lead_text: Only include the children you’re making this application for
+          record_index: "Child %{index}"
+          btn_add_another: Add another child
+          btn_remove: Remove last child
+      personal_details:
+        edit:
+          page_title: Child personal details
+          heading: "Provide details for %{name}"
+      additional_details:
+        edit:
+          page_title: Further information
+          heading: Further information
+      has_other_children:
+        edit:
+          page_title: Other children required
+          heading: Do you have other children that aren’t part of this application?
+      orders:
+        edit:
+          page_title: Which orders apply to the child
+          heading: "Which of the requested orders relate to %{name}?"
+    other_children:
+      names:
+        edit:
+          page_title: Other children
+          heading: Enter your other child’s name
+          record_index: "Child %{index}"
+          btn_add_another: Add another child
+          btn_remove: Remove last child
+      personal_details:
+        edit:
+          page_title: Child personal details
+          heading: "Provide details for %{name}"
+    other_parties:
+      names:
+        edit:
+          page_title: Other parties
+          heading: Enter the other party’s name
+          record_index: "Party %{index}"
+          btn_add_another: Add another party
+          btn_remove: Remove last party
+      personal_details:
+        edit:
+          page_title: Other party personal details
+          heading: "Provide details for %{name}"
+      contact_details:
+        edit:
+          page_title: Other party contact details
+          heading: "Contact details of %{name}"
+      relationship:
+        edit:
+          page_title: Other party relationship
+    abuse_concerns:
+      question:
+        edit:
+          page_title:
+            applicant:
+              physical: Concerns about physical abuse
+              emotional: Concerns about emotional abuse
+              psychological: Concerns about psychological abuse
+              sexual: Concerns about sexual abuse
+              financial: Concerns about financial abuse
+              other: Other concerns about your welfare
+            children:
+              physical: Concerns about your children’s physical abuse
+              emotional: Concerns about your children’s emotional abuse
+              psychological: Concerns about your children’s psychological abuse
+              sexual: Concerns about your children’s sexual abuse
+              financial: Concerns about your children’s financial abuse
+              other: Other concerns about your children’s welfare
+          heading:
+            applicant:
+              physical: Have you ever been physically abused?
+              emotional: Have you ever been emotionally abused?
+              psychological: Have you ever been psychologically abused?
+              sexual: Have you ever been sexually abused?
+              financial: Have you ever been financially abused?
+              other: Do you have any other concerns about your welfare?
+            children:
+              physical: Have your children ever been physically abused?
+              emotional: Have your children ever been emotionally abused?
+              psychological: Have your children ever been psychologically abused?
+              sexual: Have your children ever been sexually abused?
+              financial: Have your children ever been financially abused?
+              other: Do you have any other concerns about your children’s welfare?
+          lead_text:
+            applicant:
+              <<: *ABUSE_CONCERNS
+              sexual_html: |
+                <p>Examples of sexual abuse include:</p>
+                <ul class="list list-bullet">
+                  <li>being forced or pressured to have sex without consent</li>
+                  <li>threatening someone into an unwanted sexual activity</li>
+                  <li>unwanted touching or groping</li>
+                </ul>
+              emotional_html: |
+                <p>Emotional abuse can be verbal or non-verbal.</p>
+                <p>Examples include:</p>
+                <ul class="list list-bullet">
+                  <li>name calling</li>
+                  <li>constant criticism</li>
+                  <li>ignoring someone</li>
+                  <li>not letting them have an opinion</li>
+                </ul>
+            children:
+              <<: *ABUSE_CONCERNS
+              sexual_html: |
+                <p>A child is sexually abused when they are forced or persuaded to take part in sexual activities. There are 2 types of child sexual abuse:</p>
+                <ul class="list list-bullet">
+                  <li>contact abuse (where an abuser makes physical contact)</li>
+                  <li>non-contact abuse (for example grooming or exploitation)</li>
+                </ul>
+              emotional_html: |
+                <p>Examples of emotional abuse can include making the children feel:</p>
+                <ul class="list list-bullet">
+                  <li>unloved</li>
+                  <li>worthless</li>
+                  <li>humiliated</li>
+                  <li>ignored</li>
+                </ul>
+      details:
+        edit:
+          page_title:
+            applicant:
+              physical: Details of the physical abuse
+              emotional: Details of the emotional abuse
+              psychological: Details of the psychological abuse
+              sexual: Details of the sexual abuse
+              financial: Details of the financial abuse
+              other: Details of your other concerns
+            children:
+              physical: Details of your children’s physical abuse
+              emotional: Details of your children’s emotional abuse
+              psychological: Details of your children’s psychological abuse
+              sexual: Details of your children’s sexual abuse
+              financial: Details of your children’s financial abuse
+              other: Details of other concerns about your children
+          heading:
+            applicant:
+              physical: Provide details of the physical abuse
+              emotional: Provide details of the emotional abuse
+              psychological: Provide details of the psychological abuse
+              sexual: Provide details of the sexual abuse
+              financial: Provide details of the financial abuse
+              other: Provide details of your other concerns
+            children:
+              physical: Provide details of your children’s physical abuse
+              emotional: Provide details of your children’s emotional abuse
+              psychological: Provide details of your children’s psychological abuse
+              sexual: Provide details of your children’s sexual abuse
+              financial: Provide details of your children’s financial abuse
+              other: Provide details of your other concerns about your children
+      contact:
+        edit:
+          page_title: Concerns contact
+          heading: Contact between your children and the other person
+          lead_text: The court needs to know if you will allow your children to have contact with the other person while you wait for a court date.
+          info_notice: If you have no safety concerns it’s better for your children to have regular contact with both parents.
+      previous_proceedings:
+        edit:
+          page_title: Previous proceedings
+          heading: Have any of the children in this application been involved in another family court case?
+          lead_text: For example an emergency protection order or supervision order. Include any ongoing cases.
+      emergency_proceedings:
+        edit:
+          page_title: Emergency proceedings
+          heading: Were any of the cases about an emergency protection order, care or supervision order?
+    court_orders:
+      has_orders:
+        edit:
+          page_title: Have you had court orders made?
+          heading: Have you had any court orders made for your protection?
+          lead_text: For example, a restraining order. Include any orders that are still valid.
+      details:
+        edit:
+          page_title: Orders details
+          heading: What orders have been made?
+          lead_text: Select all that apply
+    safety_questions:
+      risk_of_abduction:
+        edit:
+          page_title: Risk of abduction
+          heading: Are your children at risk of being abducted?
+          lead_text: For example, by someone who is connected to the child such as the other parent or grandparent.
+          info_notice: Child abduction is when a person takes or sends a child under 16 out of the UK without permission.
+      substance_abuse:
+        edit:
+          page_title: Substance abuse
+          heading: Do you have any concerns about drug, alcohol or substance abuse?
+          lead_text: For example, you think your children are affected by being in contact with someone who may have a drug, alcohol or substance problem.
+      substance_abuse_details:
+        edit:
+          page_title: Substance abuse details
+          heading: Provide a brief summary of the nature and frequency of the substance abuse
+      children_abuse:
+        edit:
+          page_title: Children abuse
+          heading: Have your children ever been abused?
+          info_html: |
+            <p>Child abuse is any action that causes significant harm to a child.</p>
+            <p>Examples include:</p>
+            <ul class="list list-bullet">
+              <li>emotional or psychological abuse</li>
+              <li>a lack of love, care and attention</li>
+              <li>physical abuse</li>
+              <li>sexual abuse</li>
+            </ul>
+      domestic_abuse:
+        edit:
+          page_title: Domestic abuse
+          heading: Have you ever been abused?
+          info_html: |
+            <p>Domestic abuse is any type of controlling, threatening or violent behaviour between people in a relationship.</p>
+            <p>Examples include:</p>
+            <ul class="list list-bullet">
+              <li>financial abuse</li>
+              <li>emotional or psychological abuse</li>
+              <li>physical abuse</li>
+              <li>sexual abuse</li>
+            </ul>
+      other_abuse:
+        edit:
+          page_title: Other concerns
+          heading: Any other concerns?
+      address_confidentiality:
+        edit:
+          page_title: Address confidentiality
+          heading: Keeping your contact details private
+          lead_text_html: |
+            <p>A copy of your court application will be sent to the other person.</p>
+            <p>The court won’t include the contact details for you and your children if you prefer to keep them private.</p>
+
+    miam:
+      attended:
+        edit:
+          page_title: MIAM attended
+          heading: Have you attended a MIAM?
+          miam_info_html: |
+            <p>The <abbr title="Mediation Information and Assessment Meeting">MIAM</abbr> must have:</p>
+            <ul class="list list-bullet">
+              <li>taken place within the past 4 months</li>
+              <li>been about the same child arrangements issue</li>
+            </ul>
+      certification:
+        edit:
+          page_title: MIAM certification
+          heading: Have you got a signed certificate from the mediator?
+          lead_text: Your mediator should have signed a certificate confirming your MIAM attendance
+      certification_date:
+        edit:
+          page_title: MIAM certification date
+          heading: When did you attend the MIAM?
+      certification_number:
+        edit:
+          page_title: MIAM certification details
+          heading: Enter details of MIAM certification
+    petition:
+      orders:
+        edit:
+          page_title: What are you asking the court to do?
+          heading: What are you asking the court to do about your children?
+          lead_text: Select all that apply
+      other_issue:
+        edit:
+          page_title: Provide details of the issue
+          heading: Provide details of the issue you’re asking the court to resolve
+      playback:
+        show:
+          page_title: What you are asking the court to do
+          heading: What you’re asking the court to do about your children
+          lead_text:
+            zero: You’d like the court to
+            one: You’d also like the court to
+            other: You’d also like the court to
+          lead_text_issues:
+            zero: You’d like the court to resolve a dispute about
+            one: You’d also like the court to resolve a dispute about
+            other: You’d also like the court to resolve a dispute about
+          continue: Continue
+          <<: *PETITION_ORDERS
+          aka:
+            child_arrangements_order: This is known as a Child Arrangements Order.
+            specific_issues_order: This is known as a Specific Issue Order.
+            prohibited_steps_order: This is known as a Prohibited Steps Order.
+    abduction:
+      children_have_passport:
+        edit:
+          page_title: Children have passport
+          heading: Do any of your children have a passport?
+      international:
+        edit:
+          page_title: International abduction risk
+          heading: Are you worried your children will be taken out of the country?
+          contact_info_html: |
+            If you think your children are at risk of being abducted abroad you must
+            <a href="https://www.gov.uk/government/organisations/hm-passport-office" target="external_link">contact
+            the passport office</a> immediately.
+      previous_attempt:
+        edit:
+          page_title: Previous abduction attempts
+          heading: Have your children been abducted before or have there been any previous attempts or threats to abduct them?
+      previous_attempt_details:
+        edit:
+          page_title: Previous abduction details
+          heading: Provide more details of the previous attempts or threats to abduct your children
+      risk_details:
+        edit:
+          page_title: Abduction risk details
+          heading: Provide details of why you think your children may be abducted
+    application:
+      without_notice:
+        edit:
+          page_title: Without notice hearing
+          heading: Are you asking for a without notice hearing?
+          lead_text_html: |
+            <div class=" govuk-govspeak gv-s-prose">
+              <p>A without notice hearing is when your case is urgent and you don’t want to tell the other person about your application.</p>
+              <p>You can only apply for a without notice hearing if you can show that:</p>
+              <ul class="list list-bullet">
+                <li>telling the other person would allow them to interfere with your application</li>
+                <li>you or your children wouldn’t be safe if the other person knows</li>
+                <li>you don’t have time to tell the other person</li>
+              </ul>
+            </div>
+      without_notice_details:
+        edit:
+          page_title: Details of without notice hearing
+          heading: Details of without notice hearing
+
+  home:
+    index:
+      heading: Start here
+
+  layouts:
+    footer_links:
+      help: Help
+      contact: Contact
+      cookies: Cookies
+      terms_and_conditions: Terms and conditions
+    phase_banner:
+      phase_info_email_html: |
+        This is a new service. <a href="mailto:family_justice_helpdesk@digital.justice.gov.uk?subject=Feedback">Report a problem</a> and help improve it for others.
+
+  generic:
+    page_title: *default_service_title
+    back_link: Back
+
+  errors:
+    format: "%{message}"
+    messages:
+      blank: Please enter an answer
+      present: Please leave empty
+      inclusion: Please select an option
+    error_summary:
+      heading: There was a problem on the page
+      text: ''
+    invalid_session:
+      heading: Sorry, you'll have to start again
+      <<: *START_FINISH
+      lead_text: Your session automatically ends if you don't use the service for %{session_timeout} minutes or after you submit your case.
+      more_text: We do this for your security. Any unsaved details will be deleted.
+      page_title: Invalid session
+    unhandled:
+      heading: Sorry, something went wrong
+      <<: *START_FINISH
+      lead_text: To keep this service secure, any information you have entered hasn't been saved.
+      more_text: You'll need to start again.
+      page_title: Unexpected error
+
+  activemodel:
+    errors:
+      models:
+        steps/applicant/user_type_form:
+          attributes:
+            user_type:
+              inclusion: Select who is making this application
+        steps/help_with_fees/help_paying_form:
+          attributes:
+            help_paying:
+              inclusion: Select if you need help paying the court fee
+            hwf_reference_number:
+              blank: Please enter your reference number
+        steps/applicant/personal_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/applicant/contact_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/respondent/personal_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/respondent/contact_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/children/personal_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/other_children/personal_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/other_parties/personal_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+        steps/other_parties/contact_details_form:
+          attributes:
+            <<: *PERSONAL_DETAILS_ERRORS
+
+  helpers:
+    fieldset:
+      steps_shared_relationship_form:
+        relation_html: ""
+      steps_application_without_notice_form:
+        without_notice_html: ""
+      steps_application_without_notice_details_form:
+        without_notice_frustrate_html: Do you require a without notice hearing because notice to a respondent will frustrate the order that is being applied for?
+        without_notice_impossible_html: Do you require a without notice hearing because it is not possible to give notice including abridged or informal notice?
+      steps_applicant_user_type_form:
+        user_type_html: ""
+      steps_miam_acknowledgement_form:
+        miam_acknowledgement_html: ""
+      steps_miam_attended_form:
+        miam_attended_html: ""
+      steps_miam_certification_form:
+        miam_certification_html: ""
+      steps_petition_orders_form:
+        orders_html: ""
+        orders_issues_html: "Resolve a dispute over a specific issue"
+      steps_petition_other_issue_form:
+        other_issue_html: "What orders are you applying for? (optional)"
+      steps_help_with_fees_help_paying_form:
+        help_paying_html: ""
+      steps_safety_questions_address_confidentiality_form:
+        address_confidentiality_html: "Do you want to keep your contact details private?"
+      steps_safety_questions_risk_of_abduction_form:
+        risk_of_abduction_html: ""
+      steps_safety_questions_substance_abuse_form:
+        substance_abuse_html: ""
+      steps_safety_questions_children_abuse_form:
+        children_abuse_html: ""
+      steps_safety_questions_domestic_abuse_form:
+        domestic_abuse_html: ""
+      steps_safety_questions_other_abuse_form:
+        other_abuse_html: ""
+      steps_abduction_children_have_passport_form:
+        children_have_passport_html: ""
+      steps_abduction_international_form:
+        international_risk_html: ""
+        passport_office_notified_html: "Has the passport office been notified?"
+        children_multiple_passports_html: "Do the children have more than one passport?"
+        passport_possesion_html: "Who is in possession of the children’s passports?"
+      steps_abduction_previous_attempt_form:
+        previous_attempt_html: ""
+      steps_abduction_previous_attempt_details_form:
+        previous_attempt_agency_involved_html: "Were the police, private investigators or any other organisation involved?"
+      steps_abuse_concerns_question_form:
+        answer_html: ""
+      steps_abuse_concerns_contact_form:
+        concerns_contact_type_html: "Do you agree to your children spending time with the other person?"
+        concerns_contact_other_html: "Do you agree to your children having other forms of contact with the other person?"
+      steps_abuse_concerns_previous_proceedings_form:
+        children_previous_proceedings_html: ""
+      steps_abuse_concerns_emergency_proceedings_form:
+        emergency_proceedings_html: ""
+      steps_court_orders_has_orders_form:
+        has_court_orders_html: ""
+      steps_court_orders_details_form:
+        non_molestation: Non-molestation order
+        non_molestation_is_current: *order_current
+        occupation: Occupation order
+        occupation_is_current: *order_current
+        forced_marriage_protection: Forced marriage protection order
+        forced_marriage_protection_is_current: *order_current
+        restraining: Restraining order
+        restraining_is_current: *order_current
+        injunctive: Other injunctive order
+        injunctive_is_current: *order_current
+        undertaking: Undertaking in place of an order
+        undertaking_is_current: *order_current
+      steps_abuse_concerns_details_form:
+        behaviour_ongoing_html: Are you concerned the issue is still affecting your children?
+        asked_for_help_html: Have you ever asked for help?
+        help_provided_html: Did they help you?
+      steps_alternatives_negotiation_tools_form:
+        alternative_negotiation_tools: Have you tried any negotiation tools or services?
+      steps_alternatives_mediation_form:
+        alternative_mediation: Have you tried professional mediation?
+      steps_alternatives_lawyer_negotiation_form:
+        alternative_lawyer_negotiation: Have you tried lawyer negotiation?
+      steps_alternatives_collaborative_law_form:
+        alternative_collaborative_law: Have you tried collaborative law?
+      steps_alternatives_court_form:
+        court_acknowledgement_html: ""
+      steps_applicant_personal_details_form:
+        has_previous_name: Previous name?
+        gender: Sex
+      steps_applicant_contact_details_form:
+        residence_requirement_met: Have you lived at your current address for more than 5 years?
+      steps_respondent_personal_details_form:
+        has_previous_name: Have they changed their name?
+        gender: Sex
+        dob_unknown_html: ""
+      steps_respondent_contact_details_form:
+        residence_requirement_met: Have they lived at this address for more than 5 years?
+        postcode_unknown_html: ""
+        mobile_phone_unknown_html: ""
+        email_unknown_html: ""
+      steps_respondent_has_other_parties_form:
+        has_other_parties_html: ""
+      steps_children_personal_details_form:
+        dob_unknown_html: ""
+        gender: Sex
+      steps_children_orders_form:
+        orders_html: ""
+      steps_children_additional_details_form:
+        children_known_to_authorities: Are any of the children known to social services?
+        children_protection_plan: Are any of the children the subject of a child protection plan?
+      steps_children_has_other_children_form:
+        has_other_children_html: ""
+      steps_other_children_personal_details_form:
+        dob_unknown_html: ""
+        gender: Sex
+      steps_other_parties_personal_details_form:
+        has_previous_name: Have they changed their name?
+        gender: Sex
+        dob_unknown_html: ""
+      steps_other_parties_contact_details_form:
+        postcode_unknown_html: ""
+    label:
+      steps_shared_relationship_form:
+        relation_other_value: Provide details
+        relation:
+          <<: *RELATIONS
+      steps_application_without_notice_details_form:
+        without_notice_details: Give as much information as you can
+        without_notice_frustrate_details: Provide details
+        without_notice_impossible_details: Provide details
+      steps_applicant_user_type_form:
+        user_type:
+          themself: Yes, I am the person making the application
+          representative: No, I am a legal representative of the applicant
+      steps_alternatives_court_form:
+        court_acknowledgement: I understand what’s involved if I decide to go to court
+      steps_miam_acknowledgement_form:
+        miam_acknowledgement: I understand that I have to attend a MIAM or provide a valid reason for not attending.
+      steps_miam_certification_number_form:
+        miam_certification_number: FMC registration number
+      steps_help_with_fees_help_paying_form:
+        help_paying:
+          yes_with_ref_number: Yes, I have a Help with Fees reference number
+          yes_without_ref_number: Yes, but I don’t have a Help with Fees reference number
+          not_needed: 'No'
+        hwf_reference_number: Enter your reference number
+      steps_petition_orders_form:
+        <<: *PETITION_ORDERS
+        child_contact: Confirm when and what other types of contact will take place with them (for example, phone calls)
+        child_specific_issue_abroad: Moving location (including moving abroad)
+      steps_petition_other_issue_form:
+        other_details: Details
+        child_arrangements_order: Child Arrangements Order
+        prohibited_steps_order: Prohibited Steps Order
+        specific_issue_order: Specific Issue Order
+      steps_abduction_international_form:
+        passport_possession_mother: Mother
+        passport_possession_father: Father
+        passport_possession_other: Other
+        passport_possession_other_details: Provide more details (If 'other' is selected)
+      steps_abduction_previous_attempt_details_form:
+        previous_attempt_details: Give a short description
+        previous_attempt_agency_details: Provide more details
+      steps_abduction_risk_details_form:
+        risk_details: Give a short description
+      steps_children_names_form[names_attributes]:
+        full_name: Full name of child
+      steps_children_names_form:
+        new_name: Full name of child
+      steps_other_children_names_form:
+        new_name: Full name of child
+      steps_other_children_names_form[names_attributes]:
+        full_name: Full name of child
+      steps_other_parties_names_form:
+        new_name: Full name of other party
+      steps_other_parties_names_form[names_attributes]:
+        full_name: Full name of other party
+      steps_applicant_personal_details_form:
+        <<: *PERSONAL_DETAILS_FIELDS
+        previous_name: Please enter previous name
+      steps_respondent_personal_details_form:
+        <<: *PERSONAL_DETAILS_FIELDS
+      steps_applicant_contact_details_form:
+        <<: *PERSONAL_CONTACT_FIELDS
+        residence_history: Provide details and dates of all previous addresses for the last 5 years
+      steps_respondent_contact_details_form:
+        <<: *PERSONAL_CONTACT_FIELDS
+        residence_history: Please provide details of all previous addresses for the last 5 years below (if known, including the dates and starting with the most recent)
+      steps_other_children_personal_details_form:
+        <<: *PERSONAL_DETAILS_FIELDS
+      steps_other_parties_personal_details_form:
+        <<: *PERSONAL_DETAILS_FIELDS
+      steps_other_parties_contact_details_form:
+        <<: *PERSONAL_CONTACT_FIELDS
+      steps_children_personal_details_form:
+        <<: *PERSONAL_DETAILS_FIELDS
+      steps_children_orders_form:
+        <<: *PETITION_ORDERS
+      steps_children_additional_details_form:
+        children_known_to_authorities:
+          <<: *YESNO
+        children_protection_plan:
+          <<: *YESNO
+        children_known_to_authorities_details: State which child and the name of the local authority and social worker (if known)
+      steps_safety_questions_substance_abuse_details_form:
+        substance_abuse_details: Details
+      steps_abuse_concerns_details_form:
+        behaviour_description: Give a short description
+        behaviour_start: When did your concerns about your children start?
+        behaviour_stop: When did you stop being concerned about the issue affecting your children?
+        help_party: Who did you ask for help?
+        help_description: What did they do?
+        behaviour_ongoing:
+          <<: *YESNO
+        asked_for_help:
+          <<: *YESNO
+        help_provided:
+          <<: *YESNO
+      steps_abuse_concerns_contact_form:
+        concerns_contact_type:
+          unsupervised: 'Yes'
+          supervised: Yes, but it must be supervised
+          none: No, I don’t want the other person to spend time with my children
+        concerns_contact_other:
+          <<: *YESNO
+      steps_court_orders_has_orders_form:
+        has_court_orders:
+          <<: *YESNO
+      steps_court_orders_details_form:
+        non_molestation_length: *order_length
+        non_molestation_court_name: *order_court_name
+        occupation_length: *order_length
+        occupation_court_name: *order_court_name
+        forced_marriage_protection_length: *order_length
+        forced_marriage_protection_court_name: *order_court_name
+        restraining_length: *order_length
+        restraining_court_name: *order_court_name
+        injunctive_length: *order_length
+        injunctive_court_name: *order_court_name
+        undertaking_length: *order_length
+        undertaking_court_name: *order_court_name
+      user:
+        email: Your email address
+        password: Choose password
+        password_confirmation: Confirm password
+        current_password: Old password
+      user_signin:
+        email: Your email address
+        password: Enter password
+      surveys_feedback_form:
+        comment: Describe any service improvement or problems you are having
+        email: Email (optional)
+    hint:
+      user:
+        password: Must be at least 8 characters
+        current_password: We need your current password to confirm your changes
+      steps_application_without_notice_details_form:
+        without_notice_details: A court will only accept an order without notice if you give a full account of the evidence
+      steps_miam_certification_number_form:
+        miam_certification_number: You can find this number at the bottom of the form your mediator signed
+      steps_petition_other_issue_form:
+        other_details: Give a short description
+        other_issue: Select any that apply
+      steps_abduction_international_form:
+        passport_possesion: Select all that apply
+      steps_abduction_previous_attempt_details_form:
+        previous_attempt_agency_involved: Including in the UK or abroad
+      steps_applicant_personal_details_form:
+        birthplace: *birthplace_hint
+      steps_respondent_personal_details_form:
+        birthplace: *birthplace_hint
+      steps_respondent_contact_details_form:
+        address: Documents for this application will be sent here
+      steps_children_additional_details_form:
+        children_protection_plan_html: |
+          A child protection plan sets out how a child can be kept safe and is usually drawn up by a local authority
+      steps_safety_questions_substance_abuse_details_form:
+        substance_abuse_details: You don’t need to give a full statement, although you may be asked to do so at a later date
+      steps_abuse_concerns_details_form:
+        behaviour_start: Add an approximate date if you’re unsure
+        behaviour_stop: Add an approximate date if you’re unsure
+        asked_for_help: For example, your GP
+      steps_abuse_concerns_contact_form:
+        concerns_contact_other: For example, by phone, text or email
+    submit:
+      create: Continue
+      update: Continue
+      cancel: Cancel
+      save_and_come_back_later: Save and come back later
+      create_account: Save
+      sign_in: Sign in
+      reset_password: Reset password
+      change_password: Change my password
+      save_and_continue: "Save and continue"
+
+  number:
+    currency:
+      format:
+        unit: "£"
+        precision: 0
+  date:
+    formats:
+      compact: '%d/%m/%Y'
+      long: '%e %B %Y'
+  time:
+    case_expires_in:
+      zero: Today
+      one: '%{count} day'
+      other: '%{count} days'
+  shared:
+    language: (English)
+    password_toggle:
+      show_password: Show password
+      hide_password: Hide password
+    form_elements:
+      dob: Date of birth
+      dob_hint_html: 'If party under 18 read section R of <a href="http://formfinder.hmctsformfinder.justice.gov.uk/cb1-eng.pdf">leaflet CB1</a>'
+      order_issue: What date was it issued?
+  session:
+    note:
+      heading: Security time-out
+      text: After %{session_length} minutes of inactivity, we’ll check if you need
+        more time or automatically delete unsaved details for security reasons.
+    expiring:
+      aria-warning: You have been inactive for over %{passed} minutes.
+        Your session will time out in less than %{remain} minutes. Hit space bar to
+        continue for another %{session_length} minutes.
+      heading: Want more time to continue?
+      in: Your session will expire
+      security: For security reasons, any unsaved details will be deleted.
+      extend: Yes, continue
+      destroy: No, end session
+    expired:
+      title: Session expired
+      heading: Your case has been cancelled
+      description: For your security, the information you’ve entered has automatically
+        been deleted.
+      restart: You can start again below.
+      restart_button: Start again
+    canceled_message: Your case has been deleted. Please start again.
+    expired_message: You've been inactive for 30 minutes. Your case has been
+      automatically deleted. Please start again.
+    minute_single: minute
+    second_single: second
+    minutes_plural: minutes
+    seconds_plural: seconds
+  devise:
+    failure:
+      already_authenticated: "You are already signed in."
+      inactive: "Your account is not activated yet."
+      invalid: "There's an error. Please enter a valid email and password."
+      locked: "Your account is locked."
+      last_attempt: "You have one more attempt before your account is locked."
+      not_found_in_database: "There's an error. Please enter a valid email and password."
+      timeout: "Your session expired. Please sign in again to continue."
+      unauthenticated: "You need to sign in before continuing."
+      unconfirmed: "You have to confirm your email address before continuing."
+    passwords:
+      no_token: "You can only change your password using a link from a password reset email. If you have come from a password reset email, please make sure you used the full URL link provided."
+      invalid_token: "The URL used to change your password is no longer valid or has expired. Please type your email to receive a new email."
+      send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
+      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
+      updated: "Your password has been changed successfully. You are now signed in."
+      updated_not_active: "Your password has been changed successfully."
+      destroyed: "Bye! Your account has been successfully cancelled. We hope to see you again soon."
+      signed_up: "Welcome! You have signed up successfully."
+      signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
+      signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
+      signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+      update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
+      updated: "Your account has been updated successfully."
+    sessions:
+      signed_in: "Signed in successfully."
+      signed_out: "Signed out successfully."
+      already_signed_out: "Signed out successfully."
+  users:
+    logins:
+      new:
+        heading: Sign in
+        forgot_password: "Forgot your password?"
+        page_title: Sign in
+      logged_out:
+        heading: You have signed out
+        lead_text: You can return to a saved case using the link sent in the email or by returning to the start of the service.
+        page_title: Signed out
+      save_confirmation:
+        heading: Your case has been saved
+        your_cases: Go to your saved cases
+        page_title: Case saved
+    registrations:
+      new:
+        heading: Save your application
+        existing_account: Sign into an existing account
+        account_warning_html: |
+          <p>Choose an email address and password so you can sign in and complete your case later.</p>
+        email_confirmation: "An email will be sent to:"
+        page_title: Sign up
+      save_confirmation:
+        heading: Your application has been saved
+        sign_in: Sign in
+        page_title: Application saved
+      edit:
+        heading: Change your password
+        page_title: Update password
+      update_confirmation:
+        heading: "Your password has been changed"
+        lead_text: Your password has been updated successfully.
+        your_cases: Return to your saved cases
+        page_title: Password updated
+    passwords:
+      new:
+        heading: Forgot your password
+        sign_in: Go back and sign in
+        lead_text: Enter your email address and we'll send you a link to reset your password.
+        account_text: Remember, if you haven't signed in for 30 days we delete your account for security reasons.
+        page_title: Forgot password
+      edit:
+        heading: Change your password
+        page_title: Change password
+      reset_sent:
+        heading: Please check your email
+        lead_text: We have sent you an email with a link to reset your password. Please check your inbox and spam folder.
+        deleted_account: If you haven't signed in for 30 days we delete your account for security reasons.
+        page_title: Reset link sent
+      reset_confirmation:
+        heading: Your password has been changed
+        lead_text: You have set a new password successfully.
+        sign_in: Sign in to see your saved cases
+        page_title: Password changed
+  surveys:
+    feedback:
+      new:
+        page_title: Feedback
+        heading: Help us improve this service
+        submit: Submit
+        lead_text: Please tell us how to improve the service or report a problem below (your feedback will be anonymous).
+      thanks:
+        page_title: Feedback submitted
+        heading: Thank you for your feedback
+        lead_text: Your feedback helps us to improve this service.
+        continue: Continue
+  entrypoint:
+    shared:
+      start_application:
+        start: Start
+  miam:
+    index:
+      continue: Continue

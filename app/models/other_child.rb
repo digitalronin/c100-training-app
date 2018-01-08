@@ -1,0 +1,2 @@
+class OtherChild < Person
+end
