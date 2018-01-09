@@ -31,6 +31,5 @@ password should be available from the MoJ Rattic server, in the Family Justice g
 * `RAILS_ENV=test bundle exec rails db:migrate`
 * `RAILS_ENV=test bundle exec rake`
 
-
 [taxtribs]: https://github.com/ministryofjustice/tax-tribunals-datacapture
 [heroku-demo]: https://c100-demo.herokuapp.com
