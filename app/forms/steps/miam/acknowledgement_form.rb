@@ -3,7 +3,7 @@ module Steps
     class AcknowledgementForm < BaseForm
       attribute :miam_acknowledgement, Boolean
 
-      validates_presence_of :miam_acknowledgement
+    #  validates_presence_of :miam_acknowledgement
 
       private
 

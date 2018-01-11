@@ -19,16 +19,18 @@ RSpec.describe Steps::Miam::AcknowledgementForm do
       end
     end
 
-    context 'validations' do
-      it { should validate_presence_of(:miam_acknowledgement) }
-    end
+#    context 'validations' do
+#      it { should validate_presence_of(:miam_acknowledgement) }
+#    end
 
-    context 'when form is valid' do
+#    context 'when form is valid' do
+    context 'when form is submitted' do
       it 'saves the record' do
-        expect(c100_application).to receive(:update).with(
-          miam_acknowledgement: true
-        ).and_return(true)
-
+#        expect(c100_application).to receive(:update).with(
+#          miam_acknowledgement: true
+#        ).and_return(true)
+        expect(c100_application).to receive(:update)
+        .and_return(true)
         expect(subject.save).to be(true)
       end
     end
